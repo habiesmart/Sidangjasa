@@ -15,17 +15,23 @@
     <!-- Email input -->
     <div class="col-md-6 input-group-sm mb-3">
         <label class="form-label" for="email">Alamat Email</label>
-        <input type="text" id="email" name="email" class="form-control" />
+        <input type="email" id="email" name="email" class="form-control" />
+    </div>
+
+    <!-- Kode Pegawai input -->
+    <div class="input-group-sm mb-3">
+        <label class="form-label" for="kredensial">Kode Pegawai</label>
+        <input type="text" id="kredensial" name="kredensial" class="form-control" />
     </div>
 
     <!-- Password input -->
-    <div class="input-group-sm mb-3">
+    <div class="col-md-6 input-group-sm mb-3">
         <label class="form-label" for="password">Password</label>
         <input type="password" id="password" name="password" class="form-control" />
     </div>
     
     <!-- Confirm Password input -->
-    <div class="input-group-sm mb-4">
+    <div class="col-md-6 input-group-sm mb-4">
         <label class="form-label" for="password_confirmation">Ulangi Password</label>
         <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" />
     </div>
