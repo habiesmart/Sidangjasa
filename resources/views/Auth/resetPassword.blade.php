@@ -9,10 +9,19 @@
 <h5 class="text-center mb-4"><strong>Reset Password</strong></h5>
 
 <!-- Form -->
-<form action="" >
+<form action="" class="row">
     <div class="input-group-sm mb-3">
-        <label for="" class="form-label">Kode Pegawai</label>
-        <input type="text" name="kredensial" class="form-control" id="">
+        <label for="kredensial" class="form-label">Kode Pegawai</label>
+        <input type="text" name="kredensial" class="form-control" id="kredensial">
+    </div>
+
+    <div class="col-md-6 input-group-sm mb-4">
+        <label for="new_password" class="form-label">Password baru</label>
+        <input type="password" name="new_password" class="form-control" id="new_password">
+    </div>
+    <div class="col-md-6 input-group-sm mb-4">
+        <label for="new_password_confirm" class="form-label">Ketik ulang password baru</label>
+        <input type="password" name="new_password_confirm" class="form-control" id="new_password_confirm">
     </div>
 </form>
 
