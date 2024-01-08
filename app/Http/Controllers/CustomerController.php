@@ -25,7 +25,7 @@ class CustomerController extends Controller
     public function index()
     {
         $data = [
-            'data' => $this->customerRepo->all(true, $count = 5),
+            'data' => $this->customerRepo->all(true),
         ];
         return view('Customer.index', $data);
     }

@@ -38,8 +38,8 @@
                 <small class="form-text text-muted">alamat rumah</small>
             </div>
             <select name="tier_id" id="tier_id">
+                <option value="0">pilih tier</option>
                 @foreach ($tiers as $tier)
-                    <option value="0">pilih tier</option>
                     <option @if(!empty($data) && $tier->id == $data->tier_id) selected @endif value="{{$tier->id}}">{{$tier->name}}</option>
                 @endforeach
             </select>
