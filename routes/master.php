@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TierController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('master')->group(function(){
+    Route::get('/tier/all', [TierController::class, 'all'])->name('tier.all');
+    Route::resource('tier', TierController::class);
+    Route::resource('customer', CustomerController::class);
+    Route::resource('product', ProductController::class);
 });
 
-require __DIR__ . '/master.php';
+
