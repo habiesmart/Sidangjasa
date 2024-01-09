@@ -6,6 +6,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Repositories\TierRepo;
 use App\Repositories\CustomerRepo;
+use App\Http\Requests\CustomerFindRequest;
 use App\Http\Requests\CustomerStoreRequest;
 use App\Http\Requests\CustomerUpdateRequest;
 
@@ -115,5 +116,13 @@ class CustomerController extends Controller
     {
         $this->customerRepo->delete($id);
         return redirect()->back();
+    }
+
+    public function find(CustomerFindRequest $request)
+    {
+        if (strlen($request->keyword) < 3) {
+            return $this->customerRepo->all(false);
+        }
+        return $this->customerRepo->find($request->keyword);
     }
 }

@@ -19,6 +19,7 @@ use App\Http\Controllers\CustomerController;
 Route::prefix('master')->group(function(){
     Route::get('/tier/all', [TierController::class, 'all'])->name('tier.all');
     Route::resource('tier', TierController::class);
+    Route::post('/customer/find', [CustomerController::class, 'find'])->name('customer.find');
     Route::resource('customer', CustomerController::class);
     Route::resource('product', ProductController::class);
 });

@@ -35,6 +35,14 @@ class CustomerRepo implements BaseInterface
         return $data;
     }
 
+    public function find(string $keyword)
+    {
+        return Customer::where(function($query) use($keyword){
+            $query->where('name', 'LIKE', "%$keyword%")
+            ->orWhere('pic', 'LIKE', "%$keyword%");
+        })->get();
+    }
+
     public function get($id)
     {
         return Customer::where('id', $id)->firstOrCreate();
