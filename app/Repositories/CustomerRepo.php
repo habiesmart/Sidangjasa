@@ -37,6 +37,10 @@ class CustomerRepo implements BaseInterface
 
     public function find(string $keyword)
     {
+        if (strlen($keyword) < 3) {
+            return $this->all(false);
+        }
+        
         return Customer::where(function($query) use($keyword){
             $query->where('name', 'LIKE', "%$keyword%")
             ->orWhere('pic', 'LIKE', "%$keyword%");

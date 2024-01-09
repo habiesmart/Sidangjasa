@@ -120,9 +120,6 @@ class CustomerController extends Controller
 
     public function find(CustomerFindRequest $request)
     {
-        if (strlen($request->keyword) < 3) {
-            return $this->customerRepo->all(false);
-        }
         return $this->customerRepo->find($request->keyword);
     }
 }
