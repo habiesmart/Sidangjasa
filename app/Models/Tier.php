@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tier extends Model
 {
@@ -17,5 +19,15 @@ class Tier extends Model
     public static function getTableName()
     {
         return (new self())->getTable();
+    }
+
+    /**
+     * Get all of the customers for the Tier
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function customers(): HasMany
+    {
+        return $this->hasMany(Customer::class);
     }
 }
