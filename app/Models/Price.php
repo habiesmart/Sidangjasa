@@ -27,11 +27,11 @@ class Price extends Model
     }
 
     /**
-     * Get all of the price_details for the Price
+     * Get all of the priceDetail for the Price
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function price_details(): HasMany
+    public function priceDetail(): HasMany
     {
         return $this->hasMany(PriceDetail::class, 'price_id');
     }

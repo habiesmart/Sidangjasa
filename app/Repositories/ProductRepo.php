@@ -36,12 +36,12 @@ class ProductRepo implements BaseInterface
                 $price->unit = $rawPrice["unit"];
                 $data->prices()->save($price);
 
-                foreach ($rawPrice["price_details"] as $rawPriceDetail) {
+                foreach ($rawPrice["priceDetail"] as $rawPriceDetail) {
                     $priceDetail = new PriceDetail();
                     $priceDetail->tier_id =$rawPriceDetail["tier_id"];
                     $priceDetail->price =$rawPriceDetail["price"];
                     $priceDetail->is_tier =$rawPriceDetail["is_tier"];
-                    $price->price_details()->save($priceDetail);
+                    $price->priceDetail()->save($priceDetail);
                 }
             }
         }, 5);
@@ -94,12 +94,12 @@ class ProductRepo implements BaseInterface
                         ["id" => $price["id"]],
                         ["unit" => $price["unit"]]
                     );
-                    foreach ($price["price_details"] as $priceDetails) {
+                    foreach ($price["priceDetail"] as $priceDetails) {
                         if($priceDetails['action'] == "DELETE"){
-                            $dataPrices->price_details()->where('id', $priceDetails['id'])->delete();
+                            $dataPrices->priceDetail()->where('id', $priceDetails['id'])->delete();
                         }
                         else{
-                            $dataPrices->price_details()->updateOrCreate(
+                            $dataPrices->priceDetail()->updateOrCreate(
                                 ["id" => $priceDetails['id']],
                                 [
                                     "tier_id" => $priceDetails['tier_id'],

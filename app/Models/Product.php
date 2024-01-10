@@ -17,7 +17,7 @@ class Product extends Model
     public $timestamps = true;
     
     public static function relations(): array {
-        return ['labels','prices', 'prices.price_details'];
+        return ['labels','prices', 'prices.priceDetail'];
     }
 
     /**
