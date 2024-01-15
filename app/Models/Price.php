@@ -31,7 +31,7 @@ class Price extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function priceDetail(): HasMany
+    public function priceDetails(): HasMany
     {
         return $this->hasMany(PriceDetail::class, 'price_id');
     }

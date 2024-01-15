@@ -15,6 +15,9 @@ class PriceDetail extends Model
     protected $fillable = ['tier_id', 'is_tier', 'price'];
     public $timestamps = true;
 
+    public static function relations(): array {
+        return ['price', 'price.product'];
+    }
     /**
      * Get the price that owns the PriceDetail
      *
@@ -23,5 +26,9 @@ class PriceDetail extends Model
     public function price(): BelongsTo
     {
         return $this->belongsTo(Price::class);
+    }
+
+    public function country(){
+        return $this->price->product;
     }
 }

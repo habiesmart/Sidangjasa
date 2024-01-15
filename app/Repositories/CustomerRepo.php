@@ -43,7 +43,7 @@ class CustomerRepo implements BaseInterface
         
         return Customer::where(function($query) use($keyword){
             $query->where('name', 'LIKE', "%$keyword%")
-            ->orWhere('pic', 'LIKE', "%$keyword%");
+                ->orWhere('pic', 'LIKE', "%$keyword%");
         })->get();
     }
 

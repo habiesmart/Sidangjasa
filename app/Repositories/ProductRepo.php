@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class ProductRepo implements BaseInterface
 {
     public function __construct() {
-         
+
     }
 
     public function store($newData)
@@ -47,7 +47,7 @@ class ProductRepo implements BaseInterface
         }, 5);
     }
 
-    
+
     public function all($isPaginated, $count=5)
     {
         $data = null;
@@ -64,7 +64,7 @@ class ProductRepo implements BaseInterface
     {
         return Product::find($id);
     }
-    
+
     public function update($id, $newData)
     {
         DB::transaction(function() use($id, $newData){
@@ -86,7 +86,7 @@ class ProductRepo implements BaseInterface
                 }
             }
             foreach ($newData["prices"] as $price) {
-                if ($price['action'] == "DELETE") {                    
+                if ($price['action'] == "DELETE") {
                     $data->prices()->where('id', $price['id'])->delete();
                 }
                 else{
@@ -118,5 +118,35 @@ class ProductRepo implements BaseInterface
     {
         $data = $this->get($id);
         $data->delete();
+    }
+
+    public function search($data)
+    {
+        $customer = session('customers');
+        
+        $result = Product::withWhereHas('labels', function($query) use($data){
+                            return $query->where("labels.name", 'LIKE', "%".$data['keyword']."%")
+                                        ->orWhereHas('product',function($q) use($data){
+                                            return $q->where('name', 'LIKE', "%".$data['keyword']."%");
+                                        });
+                            })
+                            ->withWhereHas('prices', function($query) use($data, $customer){
+                                return $query->withWhereHas('priceDetails', function($query) use($customer){
+                                    if (session('customers') != null)
+                                        return $query->where("price_details.tier_id", $customer["tier_id"]);
+                                    else
+                                        return  $query->whereNull("price_details.tier_id");
+                                });
+                            });
+
+        if($data['product_category_id'])
+            $result = $result->where('product_category_id', $data['product_category_id']);
+
+        return $result->get();
+    }
+
+
+    public function searchv1($data){
+        
     }
 }
