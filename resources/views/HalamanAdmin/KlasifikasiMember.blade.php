@@ -22,7 +22,6 @@
                 <th>#</th>
                 <th>Nama Kualifikasi</th>
                 <th>Deskripsi</th>
-                <th>Syarat</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -31,29 +30,16 @@
                 <td>1</td>
                 <td>Gold Member</td>
                 <td>Anggota berstatus Gold</td>
-                <td>Pembelian minimal Rp 1.000.000</td>
                 <td>
                     <button class="btn btn-info btn-sm">Detail</button>
                     <button class="btn btn-warning btn-sm">Edit</button>
                     <button class="btn btn-danger btn-sm">Hapus</button>
                 </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Silver Member</td>
-                <td>Anggota berstatus Silver</td>
-                <td>Pembelian minimal Rp 500.000</td>
-                <td>
-                    <button class="btn btn-info btn-sm">Detail</button>
-                    <button class="btn btn-warning btn-sm">Edit</button>
-                    <button class="btn btn-danger btn-sm">Hapus</button>
-                </td>
-            </tr>
+  
             <!-- Tambahkan baris sesuai dengan data kualifikasi membership -->
         </tbody>
     </table>
-
 </div>
-
 </body>
 </html>
