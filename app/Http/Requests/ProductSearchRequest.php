@@ -24,7 +24,7 @@ class ProductSearchRequest extends FormRequest
     {
         return [
             'keyword' => 'string',
-            'product_category_id' => 'required'
+            'product_category_id' => 'integer|nullable'
         ];
     }
 }
