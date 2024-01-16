@@ -21,6 +21,7 @@ Route::prefix('master')->group(function(){
     Route::resource('tier', TierController::class);
     Route::post('/customer/find', [CustomerController::class, 'find'])->name('customer.find');
     Route::resource('customer', CustomerController::class);
+    Route::post('/product/search', [ProductController::class, 'search'])->name('product.search');
     Route::resource('product', ProductController::class);
 });
 

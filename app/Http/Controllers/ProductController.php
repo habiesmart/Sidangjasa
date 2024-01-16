@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepo;
 use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductSearchRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -105,5 +106,10 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         return $this->productRepo->delete($id);
+    }
+
+    public function search(ProductSearchRequest $request)
+    {
+        return($this->productRepo->search($request->all()));
     }
 }

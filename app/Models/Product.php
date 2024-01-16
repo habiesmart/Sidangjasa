@@ -7,6 +7,7 @@ use App\Models\Price;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Product extends Model
 {
@@ -17,7 +18,7 @@ class Product extends Model
     public $timestamps = true;
     
     public static function relations(): array {
-        return ['labels','prices', 'prices.priceDetail'];
+        return ['labels', 'prices', 'prices.priceDetail'];
     }
 
     /**
@@ -38,5 +39,15 @@ class Product extends Model
     public function prices(): HasMany
     {
         return $this->hasMany(Price::class);
+    }
+
+    /**
+     * Get all of the priceDetails for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function priceDetails(): HasManyThrough
+    {
+        return $this->hasManyThrough(PriceDetail::class, Price::class);
     }
 }
