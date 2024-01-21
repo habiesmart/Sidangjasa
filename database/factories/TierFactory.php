@@ -18,6 +18,7 @@ class TierFactory extends Factory
     {
         return [
             'name' => fake()->unique()->word(),
+            'description' => fake()->unique()->sentence(),
             'is_active' => fake()->boolean()
         ];
     }

@@ -16,6 +16,7 @@ class TierRepo implements BaseInterface
     {
         $data = new Tier();
         $data->name = $newData['name'];
+        $data->description = $newData['description'];
         $data->is_active = $newData['is_active'];
         $data->save();
     }
@@ -41,6 +42,7 @@ class TierRepo implements BaseInterface
     {
         $data = $this->get($id);
         $data->name = $newData->name;
+        $data->description = $newData->description;
         $data->is_active = $newData->is_active;
         return $data->save();
     }

@@ -56,6 +56,7 @@ class TierController extends Controller
     {
         $data = [
             'name' => $request->input('name'),
+            'description' => $request->input('description'),
             'is_active' => $request->has('is_active')
         ];
 
@@ -93,6 +94,7 @@ class TierController extends Controller
         $data = $this->tierRepo->get($id);
         $newData = new Tier();
         $newData->name = $request->name;
+        $newData->description = $request->description;
         $newData->is_active = $request->is_active;
         if ($data) {
             $this->tierRepo->update($id, $newData);

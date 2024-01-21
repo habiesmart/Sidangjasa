@@ -12,7 +12,7 @@ class Tier extends Model
     use HasFactory;
 
     protected $table = 'tiers';
-    // protected $fillable = ['name', 'is_active'];
+    // protected $fillable = ['name', 'description', 'is_active'];
     protected $fillable = ['*'];
     public $timestamps = true;
 
