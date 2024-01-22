@@ -18,9 +18,11 @@
                 <!-- non-member button -->
                 <div class="col-4 pe-4">
                     <div class="d-grid">
-                        <button type="button" class="btn btn-secondary py-4" style="max-height:5em;">
-                            Non-member
-                        </button>
+                        <a href="{{route('cashier.create')}}">
+                            <button type="button" class="btn btn-secondary py-4" style="max-height:5em;">
+                                Non-member
+                            </button>
+                        </a>
                         <!-- info -->
                         <p class="text-secondary mt-3">
                             <small><i class="fa-solid fa-circle-info me-1"></i>
@@ -46,16 +48,9 @@
                     <div class="overflow-y-scroll border rounded" style="max-height:20em; min-height:20rem">
                         <!-- Customer list -->
                         <div class="list-group">
-                            <button type="button" class="list-group-item list-group-item-action">Wahyu Thamrin</button>
-                            <button type="button" class="list-group-item list-group-item-action">Usyi Hassanah</button>
-                            <button type="button" class="list-group-item list-group-item-action">Salimah Yuniar</button>
-                            <button type="button" class="list-group-item list-group-item-action">Hesti Oktaviani</button>
-                            <button type="button" class="list-group-item list-group-item-action">Harjo Wibisono</button>
-                            <button type="button" class="list-group-item list-group-item-action">Wahyu Pratama</button>
-                            <button type="button" class="list-group-item list-group-item-action">Tedi Adriansyah</button>
-                            <button type="button" class="list-group-item list-group-item-action">Vero Prasetya</button>
-                            <button type="button" class="list-group-item list-group-item-action">Jono Sitompul</button>
-                            <button type="button" class="list-group-item list-group-item-action">Endra Setiawan</button>
+                            @foreach ($customers as $customer)
+                            <a href="{{route('cashier.create', ["customerID"=> $customer->id])}}" class="list-group-item list-group-item-action">{{"$customer->name | $customer->pic"}}</button>
+                            @endforeach
                         </div>
                     </div>
                 </div>
