@@ -19,9 +19,17 @@ use App\Http\Controllers\CashierController;
 
 Route::prefix('transaction')->group(function(){
     Route::get('/test', function(){});
-    Route::get('/cashier/all', [CashierController::class, 'all'])->name('cashier.all');
+
+    //cashier
     Route::resource('cashier', CashierController::class);
+
+    //Cart
+    Route::prefix('cart')->group(function(){
+        Route::post('/add-product', [CartController::class, 'addProductToCart'])->name('cart.add-product');
+    });
     Route::resource('cart', CartController::class);
+
+    //Order
     Route::resource('order', OrderController::class);
 });
 

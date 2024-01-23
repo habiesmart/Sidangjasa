@@ -7,6 +7,7 @@ use App\Models\CartDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Cart extends Model
 {
@@ -36,8 +37,15 @@ class Cart extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function customer(): HasMany
+    public function customer(): BelongsTo
     {
-        return $this->hasMany(Customer::class);
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function grandTotal()
+    {
+        return $this->cartDetails->map(function ($i){
+            return $i->price * $i->quantity;
+        })->sum();
     }
 }

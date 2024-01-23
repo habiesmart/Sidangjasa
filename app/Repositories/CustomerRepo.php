@@ -35,7 +35,7 @@ class CustomerRepo implements BaseInterface
         return $data;
     }
 
-    public function find(string $keyword)
+    public function find(?string $keyword)
     {
         if (strlen($keyword) < 3) {
             return $this->all(false);

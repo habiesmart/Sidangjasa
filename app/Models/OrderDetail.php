@@ -16,7 +16,7 @@ class OrderDetail extends Model
     public $timestamps = true;
     
     public static function relations(): array {
-        return ['order'];
+        return ['order', 'product'];
     }
 
     /**
@@ -27,5 +27,15 @@ class OrderDetail extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * Get all of the product for the OrderDetail
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
     }
 }

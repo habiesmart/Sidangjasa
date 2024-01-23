@@ -75,4 +75,9 @@ class OrderRepo implements BaseInterface
     {
         return Order::With(Order::relations())->first();
     }
+
+    public function print($data)
+    {
+        return Order::with(Order::relations())->where('receipt_number', $data->receipt_number)->first();
+    }
 }

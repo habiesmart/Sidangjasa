@@ -63,10 +63,10 @@
 <body>
     <div class="container">
         <div class="header" style="margin-bottom: 30px;">
-            <h2>Toko Sidangjasa</h2>
-            <small>
-                Jakarta Selatan
-            </small>
+            <h2>Toko {{config('app.name')}}</h2>
+            {{-- <small>
+                
+            </small> --}}
         </div>
         <hr>
         <div class="flex-container-1">
@@ -79,33 +79,25 @@
             </div>
             <div class="right">
                 <ul>
-                    <li> {{ $order->no_order }} </li>
-                    <li> {{ $order->nama_kasir }} </li>
+                    <li> {{ $order->receipt_number }} </li>
+                    {{-- <li> {{ $order->nama_kasir }} </li> --}}
                     <li> {{ date('Y-m-d : H:i:s', strtotime($order->created_at)) }} </li>
                 </ul>
             </div>
         </div>
         <hr>
         <div class="flex-container" style="margin-bottom: 10px; text-align:right;">
-            <div style="text-align: left;">Nama Product</div>
+            <div style="text-align: left;">Nama Produk</div>
+            <div>Jumlah</div>
             <div>Harga/Qty</div>
             <div>Total</div>
         </div>
-        @foreach ($order->productOrder as $item)
+        @foreach ($order->orderDetails as $orderDetail)
             <div class="flex-container" style="text-align: right;">
-                @php
-                    if(!empty($item->namaProduct->nama_product)) {
-                        $arr_name = explode(' ', $item->namaProduct->nama_product);
-                        $name = $arr_name[0];
-                    } elseif ($item->namaProduct->nama_product != '') {
-                            $name = $item->namaProduct->nama_product;
-                    } else {
-                        $name = 'there';
-                    }
-                @endphp
-                <div style="text-align: left;">{{ $item->qty }}x {{ $name }}</div>
-                <div>Rp {{ number_format($item->namaProduct->harga_product) }} </div>
-                <div>Rp {{ number_format($item->total) }} </div>
+                <div style="text-align: left;">{{$orderDetail->product->name}}</div>
+                <div>Rp {{ $orderDetail->quantity }} </div>
+                <div>Rp {{ number_format($orderDetail->price) }} </div>
+                <div>Rp {{ number_format($orderDetail->price * $orderDetail->quantity) }} </div>
             </div>
         @endforeach
         <hr>
@@ -121,14 +113,14 @@
             <div style="text-align: right;">
                 <ul>
                     <li>Rp {{ number_format($order->grand_total) }} </li>
-                    <li>Rp {{ number_format($order->pembayaran) }}</li>
-                    <li>Rp {{ number_format($order->kembalian) }}</li>
+                    <li>Rp {{ number_format($order->cash) }}</li>
+                    <li>Rp {{ number_format($order->change) }}</li>
                 </ul>
             </div>
         </div>
         <hr>
         <div class="header" style="margin-top: 50px;">
-            <h3>Terimakasih</h3>
+            <h3>Terima kasih</h3>
             <p>Silahkan berkunjung kembali</p>
         </div>
     </div>

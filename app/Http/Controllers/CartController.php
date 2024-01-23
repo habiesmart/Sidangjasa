@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CartAddProductToCartRequest;
 use Illuminate\Http\Request;
 use App\Repositories\CartRepo;
 use App\Http\Requests\CartOrderStoreRequest;
+use App\Http\Requests\CartOrderUpdateRequest;
 
 class CartController extends Controller
 {
@@ -35,15 +37,15 @@ class CartController extends Controller
      */
     public function store(CartOrderStoreRequest $request)
     {
-        $newData = $request->all();
-        $this->cartRepo->store($newData);
+        // $newData = $request->all();
+        // $this->cartRepo->store($newData);
 
-        $data = [
-            'data' => $newData,
-            'message' => 'berhasil',
-        ];
+        // $data = [
+        //     'data' => $newData,
+        //     'message' => 'berhasil',
+        // ];
 
-        return response()->json($data);
+        // return response()->json($data);
     }
 
     /**
@@ -65,9 +67,16 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CartOrderUpdateRequest $request, string $id)
     {
-        //
+        $this->cartRepo->update($id, $request->all());
+    }
+
+    public function addProductToCart(CartAddProductToCartRequest $request, string $id)
+    {
+        if ($this->cartRepo->IsExist($id)) {
+            $this->cartRepo->addProductToCart($id, $request->all());
+        }
     }
 
     /**

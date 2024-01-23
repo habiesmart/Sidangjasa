@@ -120,6 +120,10 @@ class CustomerController extends Controller
 
     public function find(CustomerFindRequest $request)
     {
-        return $this->customerRepo->find($request->keyword);
+        $data = [
+            'data' => $this->customerRepo->find($request->keyword),
+            'message'=> 'success'
+        ];
+        return $data;
     }
 }

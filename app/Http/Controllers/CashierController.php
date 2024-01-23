@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\CartRepo;
+use App\Repositories\OrderRepo;
 use App\Repositories\CustomerRepo;
 use App\Http\Requests\CashierCartRequest;
-use App\Repositories\CartRepo;
+use App\Http\Requests\CashierPrintReceiptRequest;
 
 class CashierController extends Controller
 {
     protected $sessionCust = "customer";
-    protected $customerRepo, $cartRepo;
+    protected $customerRepo, $cartRepo, $orderRepo;
 
     public function __construct() {
         $this->customerRepo = new CustomerRepo();
         $this->cartRepo = new CartRepo();
+        $this->orderRepo = new OrderRepo();
     }
 
     /**
@@ -26,6 +29,7 @@ class CashierController extends Controller
             'customers' => $this->customerRepo->all(false),
             'isExistCart' => $this->cartRepo->IsExist(),
         ];
+        
         return view('cashier.selectCustomer', $data);
     }
 
@@ -35,27 +39,19 @@ class CashierController extends Controller
     public function create(CashierCartRequest $request)
     {
         $currentCart = $this->cartRepo->first();
-
-        if($request->boolean("create-new")){
+        
+        if ($request->boolean("create-new") || !$currentCart) {
             if ($currentCart) {
                 $this->cartRepo->delete($currentCart->id);
             }
-            $this->SetCustomerSession($request);
-        }
-        else{
-            if ($currentCart) {
-                if ($request->customerID) {
-                    if ($currentCart->customer_id != $request->customerID)
-                        $this->SetCustomerSession($request);
-                    else
-                        $this->SetCustomerSession($request, $currentCart->customer);
-                }
-            }else{
-                $this->SetCustomerSession($request);
-            }
+            $this->cartRepo->store($request->all());
         }
 
-        return view('cashier.cart');
+        $data = [
+            'cart' => $currentCart
+        ]; 
+        
+        return view('cashier.cart', $data);
     }
 
     /**
@@ -98,6 +94,14 @@ class CashierController extends Controller
         //
     }
 
+    public function printReceipt(CashierPrintReceiptRequest $request)
+    {
+        $data = [
+            'order' => $this->orderRepo->print($request->all())
+        ];
+        
+        return view('Cashier.invoice', $data);
+    }
 
     private function SetCustomerSession(Request $request, $existCustomer = null)
     {
