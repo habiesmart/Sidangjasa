@@ -6,7 +6,6 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{asset('bootstrap/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('bootstrap/bootstrap.bundle.min.js')}}">
     <link rel="stylesheet" href="{{asset('bootstrap/fontawesome.min.css')}}">
     
     <!-- Style (general) -->
@@ -18,4 +17,8 @@
 @yield('content')
 
 </body>
+
+    <!-- Bootstrap js -->
+    <script src="{{asset('bootstrap/bootstrap.bundle.min.js')}}"></script>
+
 </html>
