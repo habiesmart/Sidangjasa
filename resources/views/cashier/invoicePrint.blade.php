@@ -1,16 +1,13 @@
-@extends('layout.base')
-
-@section('content')
-<style>
-        body {
-            font-size: 13px;
-        }
-        .receipt-container {
-            width: fit-content;
-            background-color: white;
-            padding: 0rem 1rem 2rem 1rem;
-            margin: 0 auto;
-            margin-top: 3rem;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Invoice</title>
+    <style>
+        .container {
+            width: 300px;
         }
         .header {
             margin: 0;
@@ -23,6 +20,7 @@
             display: flex;
             margin-top: 10px;
         }
+
         .flex-container-1 > div {
             text-align : left;
         }
@@ -37,6 +35,7 @@
             width: 300px;
             display: flex;
         }
+
         .flex-container > div {
             -ms-flex: 1;  /* IE 10 */
             flex: 1;
@@ -59,28 +58,15 @@
             color: white;
             font-weight: bold;
         }
-        #back-button {
-            position: relative;
-            left: -6rem;
-            top: 0;
-            margin: 0;
-        }
     </style>
-
-    
-
-    <!-- Invoice -->
-    <div class="receipt-container shadow">
-        <!-- Back to cashier button -->
-        <button class="btn btn-outline-secondary ms-auto" type="button" id="back-button">
-            <i class="fa-solid fa-arrow-left-long"></i>
-        </button>
-
+</head>
+<body>
+    <div class="container">
         <div class="header" style="margin-bottom: 30px;">
-            <h2>Toko {{config('app.name')}}</h2>
-            {{-- <small>
-                
-            </small> --}}
+            <h2>Toko Sidangjasa</h2>
+            <small>
+                Jakarta Selatan
+            </small>
         </div>
         <hr>
         <div class="flex-container-1">
@@ -93,27 +79,35 @@
             </div>
             <div class="right">
                 <ul>
-                    <li> {{-- $order->receipt_number --}} xxx</li>
-                    {{-- <li> {{ $order->nama_kasir }} xxx</li> --}}
-                    <li> {{-- date('Y-m-d : H:i:s', strtotime($order->created_at)) --}} xxx</li>
+                    <li> {{ $order->no_order }} </li>
+                    <li> {{ $order->nama_kasir }} </li>
+                    <li> {{ date('Y-m-d : H:i:s', strtotime($order->created_at)) }} </li>
                 </ul>
             </div>
         </div>
         <hr>
         <div class="flex-container" style="margin-bottom: 10px; text-align:right;">
-            <div style="text-align: left; flex-grow:2; ">Nama Produk</div>
-            <div>Jumlah</div>
+            <div style="text-align: left;">Nama Product</div>
             <div>Harga/Qty</div>
             <div>Total</div>
         </div>
-
-        {{-- @foreach ($order->productOrder as $item) --}}
+        @foreach ($order->productOrder as $item)
             <div class="flex-container" style="text-align: right;">
-                <div style="text-align: left; flex-grow:2;">Top Coffee Kopi Gula 2 In 1 20X25g {{-- $orderDetail->product->name --}}</div>
-                <div> {{-- $orderDetail->quantity --}} xxx</div>
-                <div>Rp {{-- number_format($orderDetail->price) --}} xxx</div>
-                <div>Rp {{-- number_format($orderDetail->price * $orderDetail->quantity) --}} xxx</div>
+                @php
+                    if(!empty($item->namaProduct->nama_product)) {
+                        $arr_name = explode(' ', $item->namaProduct->nama_product);
+                        $name = $arr_name[0];
+                    } elseif ($item->namaProduct->nama_product != '') {
+                            $name = $item->namaProduct->nama_product;
+                    } else {
+                        $name = 'there';
+                    }
+                @endphp
+                <div style="text-align: left;">{{ $item->qty }}x {{ $name }}</div>
+                <div>Rp {{ number_format($item->namaProduct->harga_product) }} </div>
+                <div>Rp {{ number_format($item->total) }} </div>
             </div>
+        @endforeach
         <hr>
         <div class="flex-container" style="text-align: right; margin-top: 10px;">
             <div></div>
@@ -126,27 +120,17 @@
             </div>
             <div style="text-align: right;">
                 <ul>
-                    <li>Rp {{-- number_format($order->grand_total) --}} xxx</li>
-                    <li>Rp {{-- number_format($order->cash) --}} xxxx</li>
-                    <li>Rp {{-- number_format($order->change) --}} xxx</li>
+                    <li>Rp {{ number_format($order->grand_total) }} </li>
+                    <li>Rp {{ number_format($order->pembayaran) }}</li>
+                    <li>Rp {{ number_format($order->kembalian) }}</li>
                 </ul>
             </div>
         </div>
         <hr>
-        <div class="header" style="margin-top: 25px;">
-            <h3>Terima kasih</h3>
+        <div class="header" style="margin-top: 50px;">
+            <h3>Terimakasih</h3>
             <p>Silahkan berkunjung kembali</p>
         </div>
     </div>
-
-    <div class="mx-auto row my-4" style="width:20rem;">
-        <button type="button" class="btn col btn-lg shadow-sm btn-primary px-5 me-3">
-            Cetak struk
-        </button>
-        <button type="button" class="btn col-2 btn-secondary">
-            <i class="fa-solid fa-house"></i>
-        </button>
-    </div>
-
-
-@endsection
+</body>
+</html>

@@ -3,14 +3,21 @@
 @section('content')
 
 <div class="ms-5 px-3 mt-3">
-    <button class="btn btn-secondary me-2">
+    <!-- Back button -->
+    <button class="btn btn-secondary shadow-sm me-2">
     <i class="fa-solid fa-arrow-left-long me-1"></i>
         Pilih membership
     </button>
-    <button class="btn btn-secondary">
+    <!-- Main menu button -->
+    <button class="btn btn-secondary shadow-sm">
         <i class="fa-solid fa-house me-1"></i>
         Main menu
     </button>
+    <!-- Customer label -->
+    <div class="d-inline py-1 px-3 ms-2 rounded-pill bg-success-subtle">
+        Customer: xxx |
+        Membership: xxx
+    </div>
 </div>
 
 <container class="row m-5 mt-3">
@@ -156,7 +163,7 @@
                 <div class="border rounded overflow-y-scroll py-1" style="height:25rem;">
                     
                     <!-- Cart table -->
-                    <table class="table table-sm m-0">
+                    <table class="table table-sm table-hover m-0">
                         <tr>
                             <td>Indomie Mi Instan Goreng Plus Special 80g</td>
                             <td><strong>Rp 40.000</strong></td>
@@ -177,7 +184,7 @@
                                 </div>
                             </td>
                             <td width="5%">
-                                <button type="button" class="btn btn-sm btn-danger rounded-circle py-0">X</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger p-0" style="width:20px;height:20px;"><i class="fa-solid fa-xmark"></i></button>
                             </td>
                         </tr>
                         <!-- sample 1-->
@@ -201,7 +208,7 @@
                                 </div>
                             </td>
                             <td width="5%">
-                                <button type="button" class="btn btn-sm btn-danger rounded-circle py-0">X</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger p-0" style="width:20px;height:20px;"><i class="fa-solid fa-xmark"></i></button>
                             </td>
                         </tr>
                         <!-- Sample 2 -->
@@ -225,7 +232,7 @@
                                 </div>
                             </td>
                             <td width="5%">
-                                <button type="button" class="btn btn-sm btn-danger rounded-circle py-0">X</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger p-0" style="width:20px;height:20px;"><i class="fa-solid fa-xmark"></i></button>
                             </td>
                         </tr>
                     </table>
