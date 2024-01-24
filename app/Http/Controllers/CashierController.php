@@ -51,7 +51,7 @@ class CashierController extends Controller
             'cart' => $currentCart
         ]; 
         
-        return view('cashier.cart', $data);
+        return view('cashier.cashier', $data);
     }
 
     /**
