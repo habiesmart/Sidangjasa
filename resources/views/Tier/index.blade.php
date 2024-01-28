@@ -11,17 +11,23 @@
         {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"> --}}
     </head>
     <body>
-        @if(Session::has('message'))
-            <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-        @endif
-        <div class="container">
-            <table id="myTable" class="table">
-                <thead>
+        <br>
+        <div class="container table-responsive">
+            <br>
+            @if(Session::has('message'))
+                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+            @endif
+            <div class="my-3">
+                <a class="btn btn-dark" href="{{ route('home') }}">&laquo; {{ __('Menu') }}</a>
+                <a class="btn btn-success float-end" href="{{ route('tier.create') }}">&plus; {{ __('Tambah') }}</a>
+            </div>
+            <table id="myTable" class="table table-striped">
+                <thead class="table-dark">
                     <tr>
-                        <th>Name</th>
+                        <th>Nama</th>
                         <th>Deskripsi</th>
-                        <th>Is Active</th>
-                        <th>Action</th>
+                        <th>Apakah Aktif</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +35,7 @@
                     @foreach ($data as $row)
                         <tr>
                             <td>{{ $row->name }}</td>
-                            <td>{{$row->deskripsi}}</td>
+                            <td>{{$row->description}}</td>
                            <td>
                                  <span class="badge bg-{{ $row->is_active ? 'success' : 'secondary' }}">
                                  {{ $row->is_active ? 'Ya' : 'Tidak' }}
@@ -43,15 +49,15 @@
                                     @csrf
                                     @method('delete')
 
-                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                    <button class="btn btn-danger" type="submit">Hapus</button>
                                 </form>
                             </td>
                         </tr> 
                     @endforeach
                 </tbody>
             </table>
+            {{$data->links()}}
         </div>
-        {{$data->links()}}
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

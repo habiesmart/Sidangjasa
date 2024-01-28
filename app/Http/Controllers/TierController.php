@@ -24,7 +24,7 @@ class TierController extends Controller
     public function index()
     {
         $data = [
-            'data' => $this->tierRepo->all(true, $count = 5),
+            'data' => $this->tierRepo->all(true, $count = 5, false),
         ];
         return view('Tier.index', $data);
     }
@@ -57,7 +57,7 @@ class TierController extends Controller
         $data = [
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'is_active' => $request->has('is_active')
+            'is_active' => $request->boolean('is_active')
         ];
 
         $this->tierRepo->store($data);
@@ -95,10 +95,10 @@ class TierController extends Controller
         $newData = new Tier();
         $newData->name = $request->name;
         $newData->description = $request->description;
-        $newData->is_active = $request->is_active;
+        $newData->is_active = $request->boolean('is_active');
         if ($data) {
             $this->tierRepo->update($id, $newData);
-            return redirect()->route('tier.index')->with('message', 'Data berhasil diupdate');
+            return redirect()->route('tier.index')->with('message', "Data $newData->name berhasil diupdate");
         }
         return redirect()->back()->with('error', 'Ada yang aneh saat update data');
     }

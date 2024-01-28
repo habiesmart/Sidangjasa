@@ -25,7 +25,7 @@ class TierUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', new UniqueInsensitiveRule(Tier::getTableName(), 'name')],
+            'name' => 'required',
             'is_active' =>'boolean'
         ];
     }

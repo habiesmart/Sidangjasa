@@ -21,15 +21,17 @@ class TierRepo implements BaseInterface
         $data->save();
     }
 
-    public function all($isPaginated, $count=5)
+    public function all($isPaginated, $count=5, $asc=true)
     {
-        $data = null;
+        $data = !$asc ? Tier::orderBy('id', 'desc'): Tier::orderBy('id');
+        
         if($isPaginated){
-            $data = Tier::paginate($count);
+            $data = $data->paginate($count);
         }
         else{
-            $data = Tier::all();
+            $data = $data->get();
         }
+
         return $data;
     }
 
