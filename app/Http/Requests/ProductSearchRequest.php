@@ -23,8 +23,10 @@ class ProductSearchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'keyword' => 'string',
-            'product_category_id' => 'integer|nullable'
+            'keyword' => 'string|nullable',
+            'product_category_id' => 'integer|nullable',
+            'customer_id' => 'integer|nullable|exists:customers,id',
+            'price_id' => 'integer|nullable|exists:prices,id',
         ];
     }
 }

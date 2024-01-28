@@ -7,13 +7,15 @@ use App\Models\Price;
 use App\Models\Product;
 use App\Models\PriceDetail;
 use App\Interfaces\BaseInterface;
+use App\Repositories\CustomerRepo;
 use Illuminate\Support\Facades\DB;
 
 
 class ProductRepo implements BaseInterface
 {
+    private $customerRepo;
     public function __construct() {
-
+        $this->customerRepo = new CustomerRepo();
     }
 
     public function store($newData)
@@ -122,7 +124,7 @@ class ProductRepo implements BaseInterface
 
     public function search($data)
     {
-        $customer = session('customers');
+        $customer = $this->customerRepo->get($data["customer_id"]);
         
         $result = Product::withWhereHas('labels', function($query) use($data){
                             return $query->where("labels.name", 'LIKE', "%".$data['keyword']."%")
@@ -131,8 +133,11 @@ class ProductRepo implements BaseInterface
                                         });
                             })
                             ->withWhereHas('prices', function($query) use($data, $customer){
+                                if ($data["price_id"]) {
+                                    $query = $query->where('id', $data["price_id"]);
+                                }
                                 return $query->withWhereHas('priceDetails', function($query) use($customer){
-                                    if (session('customers') != null)
+                                    if ($customer)
                                         return $query->where("price_details.tier_id", $customer["tier_id"]);
                                     else
                                         return  $query->whereNull("price_details.tier_id");
