@@ -16,7 +16,7 @@
         <form action="{{$route}}" method="POST">
             @csrf
             @method($http_method)
-
+            <div class="container">   
             <div class="form-group">
                 <label for="name">Nama</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Nama Customer.." value="{{ !empty($data)? old($data->name, $data->name): ''}}">
@@ -45,6 +45,7 @@
             </select>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+    </div>
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>

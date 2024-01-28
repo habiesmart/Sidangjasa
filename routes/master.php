@@ -23,6 +23,9 @@ Route::prefix('master')->group(function(){
     Route::resource('customer', CustomerController::class);
     Route::post('/product/search', [ProductController::class, 'search'])->name('product.search');
     Route::resource('product', ProductController::class);
+    Route::get('/test', function(){
+        return view('HalamanAdmin.KlasifikasiMember');
+    });
 });
 
 
