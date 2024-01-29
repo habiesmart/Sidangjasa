@@ -23,7 +23,7 @@ class CustomerStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tier_id' => 'required|exists:tiers,id|min:1|integer',
+            'tier_id' => 'required|integer|min:1|exists:tiers,id',
             'name' => 'required|string|max:100',
             'pic' => 'required|string|max:100',
             'phone' => 'required|phone:US,ID|max:50',
@@ -39,8 +39,13 @@ class CustomerStoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            // 'name.alpha' => 'karakter spesial tidak diizinkan pada isian :attribute',
-            // 'phone.phone' => 'salah input nomer telepon'
+            'tier_id.min' => 'Tier tidak boleh kosong. Pilih Tiernya terlebih dahulu',
+            'tier_id.exists' => 'Tier tidak valid!',
+            'tier.required' => 'Tier wajib diisi',
+            'name.required' => 'Nama wajib diisi',
+            'pic.required' => 'PIC wajib diisi',
+            'phone.required' => 'Nomer telepon wajib diisi',
+            'phone.phone' => 'Nomer telepon bukan nomer telepon yang valid',
         ];
     }
 }

@@ -23,14 +23,15 @@ class CustomerRepo implements BaseInterface
         $data->save();
     }
 
-    public function all($isPaginated, $count=5)
+    public function all($isPaginated, $count=5, $asc=true)
     {
-        $data = null;
+        $data = !$asc ? Customer::orderBy('id', 'desc'): Customer::orderBy('id');
+
         if($isPaginated){
-            $data = Customer::paginate($count);
+            $data = $data->paginate($count);
         }
         else{
-            $data = Customer::all();
+            $data = $data->get();
         }
         return $data;
     }

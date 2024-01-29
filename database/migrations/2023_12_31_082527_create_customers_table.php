@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tier_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('tier_id')->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->string('name', 100);
             $table->string('pic', 100);
             $table->string('phone', 50);

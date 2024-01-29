@@ -43,7 +43,7 @@
                 <input type="checkbox" class="form-check-input" id="is_active" name="is_active" value="1" @if(old("is_active") ?? $data->is_active ?? 0) checked @endif>
                 <label class="form-check-label" for="is_active">Apakah data ini diaktifkan?</label>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit &RightTriangle;</button>
         </form>
     </div>
 

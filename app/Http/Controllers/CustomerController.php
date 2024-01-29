@@ -26,7 +26,7 @@ class CustomerController extends Controller
     public function index()
     {
         $data = [
-            'data' => $this->customerRepo->all(true),
+            'data' => $this->customerRepo->all(true, asc: false),
         ];
         return view('Customer.index', $data);
     }
@@ -44,7 +44,7 @@ class CustomerController extends Controller
         $data = [
             'route' => route('customer.store'),
             'http_method' => 'POST',
-            'tiers' => $this->tierRepo->all(false)
+            'tiers' => $this->tierRepo->all(false, asc: false)
         ];
         return view('Customer.createOrEdit', $data);
     }
@@ -64,7 +64,7 @@ class CustomerController extends Controller
 
         $this->customerRepo->store($data);
 
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')->with('message', "Data customer {$data['name']} berhasil ditambahkan");
     }
 
     /**

@@ -24,7 +24,7 @@ class TierController extends Controller
     public function index()
     {
         $data = [
-            'data' => $this->tierRepo->all(true, $count = 5, false),
+            'data' => $this->tierRepo->all(true, $count = 5, asc: false),
         ];
         return view('Tier.index', $data);
     }
