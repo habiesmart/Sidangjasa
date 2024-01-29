@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
-        <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+ 
 
 
     </head>
@@ -16,8 +18,8 @@
         <form action="{{$route}}" method="POST">
             @csrf
             @method($http_method)
-            <div class="container">   
-            <div class="form-group">
+            <div class="container table-responsive">   
+            <div class="form-group table-striped">
                 <label for="name">Nama</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Nama Customer.." value="{{ !empty($data)? old($data->name, $data->name): ''}}">
                 <small class="form-text text-muted">Tingkatan atau membership untuk menentukan harga</small>
@@ -37,12 +39,14 @@
                 <textarea class="form-control" id="address" name="address" placeholder="address toko customer..">{{ !empty($data)? old($data->address, $data->address): ''}}</textarea>
                 <small class="form-text text-muted">alamat rumah</small>
             </div>
-            <select name="tier_id" id="tier_id">
+            <div class="form-group">
+                 <select class="form-control" name="tier_id" id="tier_id">
                 <option value="0">pilih tier</option>
                 @foreach ($tiers as $tier)
                     <option @if(!empty($data) && $tier->id == $data->tier_id) selected @endif value="{{$tier->id}}">{{$tier->name}}</option>
                 @endforeach
             </select>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

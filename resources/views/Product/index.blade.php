@@ -10,24 +10,17 @@
         integrity="sha384-rHyoN1iRsVXV4nDyFiAaPxi1V7kXb8Pz35LOAi/VRZQ& ..." rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <style>
-     
-        .btn-group button {
-            margin-left: 5px;
-            flex: 1; /* Menyesuaikan panjang tombol secara otomatis */
-        }
 
-        
-    </style>
 </head>
 
 <body>
+    <div class="container table-responsive py-5">
+        <br>
     @if(Session::has('message'))
     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
     @endif
-    <div class="container">
-        <table id="myTable" class="table">
-            <thead>
+        <table id="myTable" class="table table-striped">
+            <thead class="table-dark ">
                 <tr>
                     <th>Name</th>
                     <th>Product Category</th>
@@ -39,10 +32,10 @@
                 <tr>
                     <td>{{ $row->name }}</td>
                     <td>{{ $row->product_category }}</td>
-                    <td class="d-flex align-items-center">
+                    <td class="d-flex align-items-center gap-4">
                         <a class="btn btn-warning " href="{{route('product.edit',['product'=> $row->id])}}">detail</a>
                         <form action="{{route('product.destroy',['product'=> $row->id])}}" method="post"
-                            style="margin-left: 5px">
+                            >
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger">delete</button>
